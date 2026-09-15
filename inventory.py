@@ -1,4 +1,6 @@
 from models import Product
+from models import Supplier
+from models import Order
 
 def find_product_by_id(produts,product_id):
     for product in produts:
