@@ -145,19 +145,19 @@ def orders_menu(orders, products):
 
         choice = input("Enter your choice: ")
 
-        if choice == "1":
+        if choice == 1:
             create_order(orders, products)
 
-        elif choice == "2":
+        elif choice == 2:
             process_order(orders, products)
 
-        elif choice == "3":
+        elif choice == 3:
             cancel_order(orders, products)
 
-        elif choice == "4":
+        elif choice == 4:
             view_orders(orders)
 
-        elif choice == "5":
+        elif choice == 5:
             search_value = input("Enter order ID or customer name: ")
             order = find_order(orders, search_value)
 
@@ -169,7 +169,7 @@ def orders_menu(orders, products):
                 print("Status:", order.status)
                 print("Total:", order.total_amount)
 
-        elif choice == "6":
+        elif choice == 6:
             break
 
         else:

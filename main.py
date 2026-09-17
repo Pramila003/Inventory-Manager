@@ -5,8 +5,8 @@ from reports import reports_menu
 from inventory import inventory_menu
 
 def main():
-    product = load_products()
-    supplier = load_supplier()
+    products = load_products()
+    suppliers = load_supplier()
     orders = load_orders()
 
     while True:
