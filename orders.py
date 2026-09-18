@@ -14,15 +14,17 @@ def add_product_to_order(order,produts):
     product_exist=find_product_by_id(produts,product_id)
     if product_exist is None:
         print("product does not exits")
+        return 
 
     product_quantity=int(input("enter product quantity"))
     if product_quantity <=0:
         print("product can not be added")
+        return 
 
-    if product_quantity >  Product.quantity:
+    if product_quantity >  product_exist.quantity:
         print("Insufficient stock")
-
-    Order.add_item(product,quantity)
+        return 
+    order.add_item(product_exist, product_quantity)
 
 def create_order(orders,products):
     order_id=int(input("enter product id"))
@@ -32,7 +34,7 @@ def create_order(orders,products):
         return
 
     customer_name=input("enter customer name")
-    if customer_name.strip():
+    if customer_name.strip() == "" :
         print("customer name can not be empty")
         return
 
@@ -61,14 +63,15 @@ def process_order(orders,products):
     order=find_order(orders,order_id)
     if order is None:
         print("order not found")
-
+        return 
+    
     if order.status =="Completed":
         print("Order already processed")
 
     if order.status=="Cancelled":
         print("Cancelled orders cannot be processed")
 
-    for item in order.item:
+    for item in order.items:
         product=find_product_by_id(products,item["product_id"])
         if product is None:
             print("product not found",item["product_id"])
@@ -143,7 +146,7 @@ def orders_menu(orders, products):
         print("5. Find order")
         print("6. Return to main menu")
 
-        choice = input("Enter your choice: ")
+        choice = int(input("Enter your choice: "))
 
         if choice == 1:
             create_order(orders, products)

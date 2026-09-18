@@ -3,6 +3,7 @@ from orders import orders_menu
 from storage import save_order,load_orders, save_supplier, load_products, save_products, load_supplier
 from reports import reports_menu
 from inventory import inventory_menu
+from supplier import supplier_menu
 
 def main():
     products = load_products()
@@ -17,15 +18,15 @@ def main():
         print("5. Save and exit")
 
         choice = int(input("enter the choice"))
-        if choice == "1":
+        if choice == 1:
             inventory_menu(products,suppliers)
-        elif choice == "2":
+        elif choice == 2:
             supplier_menu(suppliers)
-        elif choice == "3":
+        elif choice == 3:
             orders_menu(orders, products)
-        elif choice =="4":
+        elif choice ==4:
             reports_menu(products, suppliers, orders)
-        elif choice =="5":
+        elif choice ==5:
                 save_products(products)
                 save_supplier(suppliers)
                 save_order(orders)

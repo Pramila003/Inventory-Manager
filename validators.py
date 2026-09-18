@@ -25,7 +25,7 @@ def validate_email(email):
     if "@" not in email:
         return False
 
-    at_position = email.index["@"]
+    at_position = email.index("@")
     if "." not in email[at_position:]:
         return False
 

@@ -1,11 +1,9 @@
 from models import Product
-from models import Supplier
-from models import Order
 
 def find_product_by_id(produts,product_id):
     for product in produts:
         if product.id==product_id:
-            return product.id
+            return product
     return None
 
 def display_product(product):
@@ -37,15 +35,16 @@ def add_product(products, suppliers):
 
     supplier_found=False
     for supplier in suppliers:
-        supplier_found=True
-        break
+        if supplier.id == supplier_id:
+            supplier_found=True
+            break
     if supplier_found is False:
         print(" supplier aid dose not exist,first add supplier id")
 
 
-new_product=Product(product_id,name,category,price,quantity,supplier_id,reorder_level)
-Product.append(new_product)
-print("product added successfully")
+    new_product=Product(product_id,name,category,price,quantity,supplier_id,reorder_level)
+    products.append(new_product)
+    print("product added successfully")
 
 def view_products(products):
     if len(products)==0:
@@ -109,7 +108,7 @@ def update_product(products,suppliers):
 
         choice=int(input("enter the choice"))
         if choice==1:
-            print("current name:",Product.name)
+            print("current name:",products.name)
             new_name=input("enter new name")
             if new_name.strip()=="":
                 print("name can not be empty")
@@ -119,7 +118,7 @@ def update_product(products,suppliers):
 
 
         elif choice==2:
-            print("current category: ",Product.category)
+            print("current category: ",products.category)
             new_category=input("enter new category")
             if new_category.strip()=="":
                 print("category can not be empty")
@@ -161,7 +160,7 @@ def restock_product(products):
         print("product does not exits")
         return
     else:
-        print("current_quantity: ",product.quantity)
+        print("current_quantity: ",products.quantity)
         print("choose 1: to add " \
         "choose 2: to remove")
         choice=int(input("enter choice"))
@@ -189,7 +188,7 @@ def remove_product(products):
 def show_low_stock_product(products):
     low_stock_products=[]
     for product in products:
-        low_stock_products=products.is_low_stock()
+        low_stock_products=product.is_low_stock()
         if low_stock_products:
             Product.append(low_stock_products)
     if len(low_stock_products)==0:
