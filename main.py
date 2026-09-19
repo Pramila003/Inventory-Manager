@@ -17,7 +17,7 @@ def main():
         print("4. Reports")
         print("5. Save and exit")
 
-        choice = int(input("enter the choice"))
+        choice = int(input("enter the choice: "))
         if choice == 1:
             inventory_menu(products,suppliers)
         elif choice == 2:

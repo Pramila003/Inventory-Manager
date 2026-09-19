@@ -10,13 +10,13 @@ def find_order(orders,search_value):
     return None
 
 def add_product_to_order(order,produts):
-    product_id=int(input("enter product id"))
+    product_id=int(input("enter product id: "))
     product_exist=find_product_by_id(produts,product_id)
     if product_exist is None:
         print("product does not exits")
         return 
 
-    product_quantity=int(input("enter product quantity"))
+    product_quantity=int(input("enter product quantity: "))
     if product_quantity <=0:
         print("product can not be added")
         return 
@@ -27,13 +27,13 @@ def add_product_to_order(order,produts):
     order.add_item(product_exist, product_quantity)
 
 def create_order(orders,products):
-    order_id=int(input("enter product id"))
+    order_id=int(input("enter product id: "))
     existing_order=find_order(orders,order_id)
     if existing_order is not None:
         print("product already exits in Orders")
         return
 
-    customer_name=input("enter customer name")
+    customer_name=input("enter customer name: ")
     if customer_name.strip() == "" :
         print("customer name can not be empty")
         return
@@ -43,10 +43,10 @@ def create_order(orders,products):
     while True:
         add_product_to_order(order,products)
         choice=input("Add another product? yes/no").lower()
-        if choice =='yes':
+        if choice !='yes':
             break
 
-        if not order.item :
+        if not order.items :
             print("Order has no items. It was not saved.")
             return 
 
@@ -58,39 +58,49 @@ def create_order(orders,products):
         print("Total amount:", order.total_amount)
         print("Status:", order.status)
 
-def process_order(orders,products):
-    order_id=int(input("enter order id"))
-    order=find_order(orders,order_id)
+def process_order(orders, products):
+    try:
+        order_id = int(input("enter order id: "))
+    except ValueError:
+        print("Invalid order ID. Please enter a number.")
+        return
+
+    order = find_order(orders, order_id)
     if order is None:
         print("order not found")
         return 
+
     
-    if order.status =="Completed":
+    if order.status == "Completed":
         print("Order already processed")
+        return  # Added return
 
-    if order.status=="Cancelled":
+    
+    if order.status == "Cancelled":
         print("Cancelled orders cannot be processed")
+        return  # Added return
 
+    
     for item in order.items:
-        product=find_product_by_id(products,item["product_id"])
+        product = find_product_by_id(products, item["product_id"])
         if product is None:
-            print("product not found",item["product_id"])
+            print("product not found:", item["product_id"])
             return
-        if item["quantity"]> product.quantity:
-            print("insufficient stock for",product.name)
+        if item["quantity"] > product.quantity:
+            print("insufficient stock for", product.name)
             return
 
-        for item in order.items:
-            product = find_product_by_id(products, item["product_id"])
+    
+    for item in order.items:
+        product = find_product_by_id(products, item["product_id"])
+        product.update_stock(-item["quantity"])
 
-            product.update_stock(-item["quantity"])
+    # 5. Finalize status and print summary (Outside all loops)
+    order.change_status("Completed")
 
-        order.change_status("Completed")
-
-        print("Order processed successfully.")
-        print("Order ID:", order.id)
-        print("Total amount:", order.total_amount)
-
+    print("Order processed successfully.")
+    print("Order ID:", order.id)
+    print("Total amount:", order.total_amount)
 def cancel_order(orders,products):
     order_id=input("enter the order id")
     order=find_order(orders,order_id)
@@ -126,14 +136,13 @@ def view_orders(orders):
             print("Created at:", order.created_at)
             print("Total amount:", order.total_amount)
 
-        print("Items")
-        for item in order.items:
-            print("Order ID:", order.id)
-            print("Customer:", order.customer_name)
-            print("Status:", order.status)
-            print("Created at:", order.created_at)
-            print("Total amount:", order.total_amount)
-
+            print("Items")
+            if not order.items:
+                print("  (No items in this order)")
+            else:
+                for item in order.items:
+                # Adjust attribute names below to match your item model/dict
+                    print(f"  - {item.name}: {item.quantity} x {item.price}")
             
 
 def orders_menu(orders, products):

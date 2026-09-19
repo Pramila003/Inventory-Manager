@@ -102,7 +102,7 @@ def reports_menu(products, suppliers, orders):
         elif choice == 4:
             supplier_report(products,suppliers)
         elif choice == 5:
-            reports_menu
+            break
         else:
             print("invalid choice")
 

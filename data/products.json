@@ -1,1 +1,11 @@
-[]
+[
+    {
+        "id": 1,
+        "name": "lipoil",
+        "category": "lipbalm",
+        "price": 200,
+        "quantity": 5,
+        "supplier_id": 1,
+        "reorder_level": 1
+    }
+]

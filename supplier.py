@@ -17,7 +17,7 @@ def display_supplier(supplier):
 
 def add_supplier(suppliers):
     supplier_id = int(input("enter the supplier id"))
-    name = input("enter the name")
+    name = input("enter the name: ")
     if name.strip() == "":
             print("name can not be empty")
             return  
@@ -25,11 +25,11 @@ def add_supplier(suppliers):
     if find_suppplier_by_id(suppliers, supplier_id) is not None:
         print("Supplier ID already exists")
         return
-    email = input("enetr the email")
+    email = input("enetr the email: ")
     if not validate_email(email):
             print(" email is invalid")
             return 
-    phone = input("enter the phone")
+    phone = input("enter the phone: ")
 
    
 
@@ -68,7 +68,7 @@ def update_supplier(suppliers):
         print("1 name")
         print("2 email")
         
-        choice = int(input("enter the choice"))
+        choice = int(input("enter the choice: "))
 
         if choice == 1:
             print("current name",supplier.name)
