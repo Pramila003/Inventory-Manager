@@ -141,8 +141,8 @@ def view_orders(orders):
                 print("  (No items in this order)")
             else:
                 for item in order.items:
-                # Adjust attribute names below to match your item model/dict
-                    print(f"  - {item.name}: {item.quantity} x {item.price}")
+                
+                    print(f"  - {item.customer_name}: {item.quantity} x {item.total_amount}")
             
 
 def orders_menu(orders, products):

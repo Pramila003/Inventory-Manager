@@ -23,6 +23,7 @@ class Product:
             return True
         else:
             return False
+        
     def to_dict(self):
         return{
             "id": self.id,
@@ -74,9 +75,9 @@ class Order:
     def calculate_total(self):
          total=0
          for item in self.items:
-              total +=self.item["subtotal"]
-              self.total_amount +=total
-              return self.total_amount
+              total +=item["subtotal"]
+         self.total_amount += total
+         return self.total_amount
 
     def change_status(self,new_status):
          alllowed_status=["Pending","Completed","Cancelled"]

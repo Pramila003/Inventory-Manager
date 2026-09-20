@@ -7,19 +7,31 @@ def load_products():
     try:
         with open (r"C:\Users\Admin\Desktop\pythoncc\inventory-manager\data\products.json","r") as file:
             product_data = json.load(file)
-            return product_data
+            products = [
+            Product(
+                id=item["id"],
+                name=item["name"],
+                category=item["category"],
+                price=item["price"],
+                quantity=item["quantity"],
+                supplier_id=item["supplier_id"],
+                reorder_level=item["reorder_level"],
+            )
+            for item in product_data
+        ]
+        return products
 
-    except FileNotFoundError:
+    except (FileNotFoundError, json.JSONDecodeError):
         return []
 
-    products =[] 
+    # products =[] 
 
-    for data in product_data:
-        product = Product(id=data["id"],name=data["name"],category=data["category"],price=data["price"],quantity=data["quantity"],supplier_id=data["supplier_id"],reorder_level=data["reorder_level"])
+    # for data in product_data:
+    #     product = Product(id=data["id"],name=data["name"],category=data["category"],price=data["price"],quantity=data["quantity"],supplier_id=data["supplier_id"],reorder_level=data["reorder_level"])
 
-        products.append(product)
+    #     products.append(product)
 
-    return products
+    # return products
 
 def save_products(products):
     product_data = []

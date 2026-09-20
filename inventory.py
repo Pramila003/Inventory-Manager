@@ -2,18 +2,18 @@ from models import Product
 
 def find_product_by_id(produts,product_id):
     for product in produts:
-        if (product['id'])==product_id:
+        if product.id==product_id:
             return product
     return None
 
 def display_product(product):
-    print("ID:",product['id'])
-    print("name:",product['name'])
-    print("category",product['category'])
-    print("Price",product['price'])
-    print("quantity",product['quantity'])
-    print("supplier_id",product['supplier_id'])
-    print("reoder_level",product['reorder_level'])
+    print("ID:",product.id)
+    print("name:",product.name)
+    print("category",product.category)
+    print("Price",product.price)
+    print("quantity",product.quantity)
+    print("supplier_id",product.supplier_id)
+    print("reoder_level",product.reorder_level)
 
     
     if product.is_low_stock():

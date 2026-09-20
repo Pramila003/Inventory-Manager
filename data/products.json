@@ -7,5 +7,23 @@
         "quantity": 5,
         "supplier_id": 1,
         "reorder_level": 1
+    },
+    {
+        "id": 1,
+        "name": "lipbalm",
+        "category": "lipoil",
+        "price": 200,
+        "quantity": 2,
+        "supplier_id": 1,
+        "reorder_level": 1
+    },
+    {
+        "id": 1,
+        "name": "lipbalm",
+        "category": "lipoil",
+        "price": 200,
+        "quantity": 2,
+        "supplier_id": 1,
+        "reorder_level": 1
     }
 ]
