@@ -3,26 +3,26 @@ from validators import validate_email
 
 def find_suppplier_by_id(suppliers, supplier_id):
     for supplier in suppliers:
-        if supplier.id == supplier_id:
+        if supplier['id'] == supplier_id:
             return supplier
         
     return None
 
 def display_supplier(supplier):
-    print("Supplier ID",supplier.id)
-    print("Name",supplier.name)
-    print("Email",supplier.email)
-    print("phone",supplier.phone)
+    print("Supplier ID:", supplier['id'])
+    print("Name:", supplier['name'])
+    print("Email:", supplier['email'])
+    print("Phone:", supplier['phone'])
 
 
 def add_supplier(suppliers):
-    supplier_id = int(input("enter the supplier id"))
+    id = int(input("enter the supplier id"))
     name = input("enter the name: ")
     if name.strip() == "":
             print("name can not be empty")
             return  
     
-    if find_suppplier_by_id(suppliers, supplier_id) is not None:
+    if find_suppplier_by_id(suppliers, id) is not None:
         print("Supplier ID already exists")
         return
     email = input("enetr the email: ")
@@ -35,7 +35,12 @@ def add_supplier(suppliers):
 
     
 
-    supplier = Supplier(supplier_id , name, email, phone)
+    supplier = {
+        'id': id,
+        'name': name,
+        'email': email,
+        'phone': phone
+    }
     suppliers.append(supplier)
     print("Supplierd  added successfully")
 
@@ -53,7 +58,7 @@ def search_supplier(suppliers):
 
     supplier_name = input("enter supplier name you want to search").lower()
     for supplier in suppliers:
-        if supplier.name.lower() == supplier_name:
+        if supplier['name'].lower() == supplier_name:
             display_supplier(supplier)
 
 def update_supplier(suppliers):
@@ -71,23 +76,24 @@ def update_supplier(suppliers):
         choice = int(input("enter the choice: "))
 
         if choice == 1:
-            print("current name",supplier.name)
+            print("current name",supplier['name'])
             new_name = input("enter new name")
             if new_name.strip() == "":
                 print("name can not be empty")
+                return
 
-            supplier.name = new_name
-            print("updated name:",supplier.name)
+            supplier['name'] = new_name
+            print("updated name:",supplier['name'])
 
         if choice == 2:
-            print("current email: ",supplier.email)
+            print("current email: ",supplier['email'])
             new_email = input("enter new email")
 
             if not validate_email(new_email):
                 print("email is onvalid")
 
-            supplier.email = new_email
-            print("updated email:",supplier.email)
+            supplier['email'] = new_email
+            print("updated email:",supplier['email'])
 
 
 def remove_supplier(suppliers):

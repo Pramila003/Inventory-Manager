@@ -23,7 +23,7 @@ def add_product(products, suppliers):
     product_id=int(input("enter product id: "))
     name=input("enter product name: ")
     category=input("enter the category of product: ")
-    price=int(input("enter th price: "))
+    price=float(input("enter th price: "))
     quantity=int(input("enter the quantity: "))
     supplier_id=int(input("enter supplier id: "))
     reorder_level=int(input("enter reodrder level: "))
@@ -35,7 +35,7 @@ def add_product(products, suppliers):
 
     supplier_found=False
     for supplier in suppliers:
-        if supplier.id == supplier_id:
+        if supplier['id']== supplier_id:
             supplier_found=True
             break
     if supplier_found is False:

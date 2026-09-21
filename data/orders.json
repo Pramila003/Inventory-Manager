@@ -1,1 +1,17 @@
-[]
+[
+    {
+        "id": 1,
+        "customer_name": "xyz",
+        "items": [
+            {
+                "product_id": 1,
+                "product_name": "lipbalm",
+                "quantity": 1,
+                "unit_price": 200.0,
+                "subtotal": 200.0
+            }
+        ],
+        "total_amount": 400.0,
+        "status": "Completed"
+    }
+]

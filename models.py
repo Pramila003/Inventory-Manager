@@ -56,21 +56,36 @@ class Order:
         self.id=id
         self.customer_name=customer_name
         self.items=[]
-        self.total_amount=0
+        self.total_amount=0.0
         self.status= "Pending"
         self.created_at=datetime.now()
 
     def add_item(self,product,quantity):
-        subtotal=product.price *quantity
+        if isinstance(product, dict):
+            p_id = product['id']
+            p_name = product['name']
+            p_price = float(product['price'])
+        else:
+            p_id = product.id
+            p_name = product.name
+            p_price = float(product.price)
+
+        
+        quantity = int(quantity)
+
+        subtotal = p_price * quantity
+
+      
         item={
-             "product_id": product.id,
-             "product_name":product.name,
+             "product_id": p_id,
+             "product_name":p_name,
              "quantity":quantity,
-             "unit_price":product.price,
+             "unit_price":p_price,
              "subtotal":subtotal
         }
         self.items.append(item)
         self.total_amount += subtotal
+        print("Item added succesfully")
 
     def calculate_total(self):
          total=0
@@ -88,12 +103,13 @@ class Order:
         
 
     def to_dict(self):
-            return{
+    
+        return{
                 "id": self.id,
                 "customer_name": self.customer_name,
                 "items": self.items,
                 "total_amount": self.total_amount,
                 "status":self.status,
-                "created_at":self.created_at
+                # "created_at":self.created_at_str
                
             }

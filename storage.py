@@ -66,8 +66,10 @@ def save_supplier(suppliers):
     supplier_data = []
 
     for supplier in suppliers:
-        supplier_dict=supplier.to_dict()
-        supplier_data.append(supplier_dict)
+        if isinstance(supplier,dict):
+            supplier_data.append(supplier)
+        else:
+            supplier_data.append(supplier.to_dict)
 
     try:
         with open(r"data\suppliers.json","w") as file:
@@ -90,20 +92,24 @@ def load_orders():
         order.item = data["item"]
         order.total_amount = data["total_amount"]
         order.status = data["status"]
-        order.created_at =datetime.fromisoformat(data["created_at"])
+        # order.created_at =datetime.fromisoformat(data["created_at_str"])
         orders.append(order)
 
     return orders    
 
 def save_order(orders):
     order_data = []
-    for data in order_data:
-        order_dict = order.to_dict()
-        order_data.append(order_dict)
+    for data in orders:
+        if isinstance(data,dict):
+            order_data.append(data)
+        else:
+            order_data.append(data.to_dict())
+
 
     try:
         with open(r"data\orders.json","w") as file:
             json.dump(order_data,file,indent=4)
+            return order_data
     except FileNotFoundError:
         return []
     
